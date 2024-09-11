@@ -6,4 +6,5 @@ import com.serve.models.RestaurantModel;
 
 public interface RestaurantDAO {
 	List<RestaurantModel> fetchAllRastaurants();
+	RestaurantModel fetchRastaurant(int restaurantId);
 }

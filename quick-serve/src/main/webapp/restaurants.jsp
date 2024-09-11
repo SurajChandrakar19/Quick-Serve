@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/restaurants.css">
 </head>
 <body>
-    <div class="header">
+    <div class="header"> 
         <h1>Restaurant List</h1>
     </div>
     <div class="restaurant-list-container">
@@ -19,7 +19,7 @@
             if (restaurants != null && !restaurants.isEmpty()) {
                 for (RestaurantModel restaurant : restaurants) {
         %>
-        <a href="restaurants-menus.jsp" style="text-decoration:none;">
+        <a href="menus?id=<%=restaurant.getId()%>" style="text-decoration:none;">
 	        <div class="restaurant-card">
 	            <div class="restaurant-header">
 	                <img src="<%= restaurant.getLogoUrl() %>" alt="<%= restaurant.getName() %> logo" class="restaurant-logo">
