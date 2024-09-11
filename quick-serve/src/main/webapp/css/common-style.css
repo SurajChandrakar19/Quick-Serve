@@ -1,0 +1,25 @@
+@charset "ISO-8859-1";
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+:root {
+        /* card color */
+        --primary-color: #48CFCB; 
+
+        --secondary-color: #229799;
+        /* baground color */
+        --bg-color: #F5F5F5;
+        /* button color */
+        --accent-color: #424242;
+        --btn-color:#229799;
+        /* font color */
+        --font-color: #fff;
+    }
+
+/*--primary-color: #32012F;
+            --secondary-color: #524C42;
+            --bg-color: #E2DFD0;
+            --accent-color: #F97300;
+            --font-color: #fff;*/

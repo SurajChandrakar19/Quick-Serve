@@ -1,0 +1,43 @@
+@charset "ISO-8859-1";
+
+ body {
+     font-family: 'Arial', sans-serif;
+     background-color: var(--bg-color);
+     margin: 0;
+     padding: 0;
+ }
+ .header {
+     background-color: var(--primary-color);
+     color: var(--font-color);
+     padding: 20px;
+     text-align: center;
+ }
+ .order-history-container {
+     padding: 20px;
+ }
+ .order-history-container h1 {
+     text-align: center;
+     font-size: 2em;
+     color: var(--primary-color);
+ }
+ .order-item {
+     background-color: var(--secondary-color);
+     color: var(--font-color);
+     padding: 15px;
+     margin-bottom: 20px;
+     border-radius: 10px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ }
+ .order-item p {
+     margin: 0;
+     font-size: 1em;
+ }
+ .btn {
+     background-color: var(--accent-color);
+     padding: 10px;
+     color: white;
+     text-decoration: none;
+     border-radius: 5px;
+     margin-top: 10px;
+     display: inline-block;
+ }
