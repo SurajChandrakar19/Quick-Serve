@@ -10,6 +10,7 @@ public class MyConnection {
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "Root";
 	
+	
 	//load mysql driver
 	static {
 		try {
