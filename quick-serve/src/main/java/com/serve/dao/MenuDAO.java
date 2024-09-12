@@ -6,4 +6,5 @@ import com.serve.models.MenuModel;
 
 public interface MenuDAO {
 	List<MenuModel> fetchAllMenu(int restaurantId);
+	MenuModel fetchMenu(int iId);
 }

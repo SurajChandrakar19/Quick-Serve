@@ -1,3 +1,4 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.Param"%>
 <%@page import="com.serve.dao.impl.RestaurantsDAOImpl"%>
 <%@page import="com.serve.models.RestaurantModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -41,7 +42,7 @@
 	        <div class="menu-item">
 	            <h2><%= menu.getItemName()%></h2>
 	            <p><%= menu.getPrice() %>$</p>
-	            <a href="addToCart.jsp" class="btn">Add to Cart</a>
+	            <a href="addToCart?iId=<%=menu.getItemId() %>&rId=<%=request.getParameter("id") %>" class="btn">Add to Cart</a>
 		    </div>
 	    <% 	}
 	      } else {

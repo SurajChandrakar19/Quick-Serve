@@ -22,6 +22,7 @@ public class MenusServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		System.out.println("hello" + req.getParameter("id"));
 //		System.out.println(req.getParameter("name"));
+		
 		req.getRequestDispatcher("restaurants-menus.jsp").forward(req, resp);
 	}
 	
