@@ -63,12 +63,15 @@ public class MenuDAOImpl implements MenuDAO {
 
 	@Override
 	public MenuModel fetchMenu(int iId) {
-		String query = "SELECT * FORM menu_item WHERE item_id = ?";
+		String query = "SELECT * FROM menu_item WHERE item_id = ?";
 		MenuModel menu = new MenuModel();
 		try {
 			pstm = con.prepareStatement(query);
 			pstm.setInt(1, iId);
+			
 			result = pstm.executeQuery();
+			result.next();
+			
 			menu.setItemId(result.getInt("item_id"));
 			menu.setRestaurantId(result.getInt("restaurant_id"));
 			menu.setItemName(result.getString("item_name"));

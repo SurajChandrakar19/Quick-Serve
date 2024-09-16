@@ -19,126 +19,96 @@ public class CartItem {
     private Timestamp orderDate;            // When the item was added to the cart
     private boolean isAvailable;            // Whether the item is still available for order
     private String status;                  // Status of the item ('in_cart', 'ordered', 'cancelled')
+	public int getCartItemId() {
+		return cartItemId;
+	}
+	public void setCartItemId(int cartItemId) {
+		this.cartItemId = cartItemId;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public int getRestaurantId() {
+		return restaurantId;
+	}
+	public void setRestaurantId(int restaurantId) {
+		this.restaurantId = restaurantId;
+	}
+	public int getMenuItemId() {
+		return menuItemId;
+	}
+	public void setMenuItemId(int menuItemId) {
+		this.menuItemId = menuItemId;
+	}
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public BigDecimal getPrice() {
+		return price;
+	}
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public boolean isCustomized() {
+		return isCustomized;
+	}
+	public void setCustomized(boolean isCustomized) {
+		this.isCustomized = isCustomized;
+	}
+	public String getCustomizationDetails() {
+		return customizationDetails;
+	}
+	public void setCustomizationDetails(String customizationDetails) {
+		this.customizationDetails = customizationDetails;
+	}
+	public boolean isSpicy() {
+		return isSpicy;
+	}
+	public void setSpicy(boolean isSpicy) {
+		this.isSpicy = isSpicy;
+	}
+	public boolean isVeg() {
+		return isVeg;
+	}
+	public void setVeg(boolean isVeg) {
+		this.isVeg = isVeg;
+	}
+	public Timestamp getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(Timestamp orderDate) {
+		this.orderDate = orderDate;
+	}
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    // Getters and Setters
-    public int getCartItemId() {
-        return cartItemId;
-    }
-
-    public void setCartItemId(int cartItemId) {
-        this.cartItemId = cartItemId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getRestaurantId() {
-        return restaurantId;
-    }
-
-    public void setRestaurantId(int restaurantId) {
-        this.restaurantId = restaurantId;
-    }
-
-    public int getMenuItemId() {
-        return menuItemId;
-    }
-
-    public void setMenuItemId(int menuItemId) {
-        this.menuItemId = menuItemId;
-    }
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public boolean isCustomized() {
-        return isCustomized;
-    }
-
-    public void setCustomized(boolean isCustomized) {
-        this.isCustomized = isCustomized;
-    }
-
-    public String getCustomizationDetails() {
-        return customizationDetails;
-    }
-
-    public void setCustomizationDetails(String customizationDetails) {
-        this.customizationDetails = customizationDetails;
-    }
-
-    public boolean isSpicy() {
-        return isSpicy;
-    }
-
-    public void setSpicy(boolean isSpicy) {
-        this.isSpicy = isSpicy;
-    }
-
-    public boolean isVeg() {
-        return isVeg;
-    }
-
-    public void setVeg(boolean isVeg) {
-        this.isVeg = isVeg;
-    }
-
-    public Timestamp getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Timestamp orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean isAvailable) {
-        this.isAvailable = isAvailable;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }
 
