@@ -4,6 +4,7 @@
 <%@page import="com.serve.models.CartItem" %>
 <%@page import = "java.util.List"%>
 <%@page import="java.util.Iterator" %>
+<%@page import="java.math.BigDecimal" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,9 +36,12 @@
 	<% 
 	CartDAOImpl cart = new CartDAOImpl();
 	List<CartItem> carts = cart.fetchMyCart(1);
+	BigDecimal total = BigDecimal.ZERO;
+	int totalItem = 0;
 	for(CartItem menu : carts ){
+		totalItem++;
+		total = total.add(menu.getTotalPrice());
 	%>
-	
     <!-- Single Cart Item -->
     <div class="cart-item">
         <img src=" menu.getMenuImageUrl() %>" alt="Item Image" class="cart-item-image">
@@ -52,7 +56,7 @@
                     <label for="quantity">Qty:</label>
                     <input type="number" id="quantity" name="quantity" value=<%=menu.getQuantity() %> min="1" class="quantity-input">
                     
-                    <p class="cart-item-total-price">Total: <%= menu.getPrice() %>₹</p>
+                    <p class="cart-item-total-price">Total: <%= menu.getTotalPrice() %>₹</p>
                     <input type="hidden" name="cart_item_id" value=<%= menu.getCartItemId() %>>
                     
                     <button type="submit" class="btn-update-cart">Update</button>
@@ -64,8 +68,8 @@
  <!-- Overall Cart Summary -->
 <div class="cart-summary">
     <h3>Cart Summary</h3>
-    <p>Total Items: <span id="total-items">1</span></p>
-    <p>Grand Total: ₹<span id="grand-total">  menu.getPrice() %></span></p>
+    <p>Total Items: <span id="total-items"> <%= totalItem %></span></p>
+    <p>Grand Total: ₹<span id="grand-total"> <%= total%></span></p>
 
     <form action="placeOrder" method="post">
         <button type="submit" class="btn-place-order">Place Order</button>

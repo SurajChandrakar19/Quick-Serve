@@ -32,7 +32,7 @@ public class CartDAOImpl implements CartDAO {
 		try {
 			item = fetchMyCart(userId, restaurantId, menu.getItemId());
 			if(item != null) {
-				updateCart(1,item.getCartItemId());
+				inItemQ(1,item.getCartItemId());
 				return true;
 			}
 			pstm = MyConnection.getPrepareStatement(query, con);
@@ -118,8 +118,8 @@ public class CartDAOImpl implements CartDAO {
 	
 	@Override
 	public boolean updateCart(int quantity, int cart_item_id) {
-		String query = "UPDATE cart_item c JOIN menu_item m ON  c.menu_item_id = m.item_id SET c.price = m.price * ?, c.quantity = ? WHERE c.cart_item_id = ?;";
-//		String query = "UPDATE cart_item SET quantity = quantity+? AND price = SELECT price from ? * ? WHERE cart_item_id = ?;";
+		String query = "UPDATE cart_item c JOIN menu_item m ON  c.menu_item_id = m.item_id SET c.total_price = m.price * ?, c.quantity = ? WHERE c.cart_item_id = ?;";
+
 		pstm = MyConnection.getPrepareStatement(query, con);
 		try {
 			pstm.setInt(1, quantity);
@@ -157,6 +157,21 @@ public class CartDAOImpl implements CartDAO {
 		return items;
 	}
 
-	
+	private boolean inItemQ(int quantity, int cartItemId) {
+		String query = "UPDATE cart_item SET quantity = quantity+1, price = price * quantity+1 WHERE cart_item_id = ?;";
+		pstm = MyConnection.getPrepareStatement(query, con);
+		try {
+			pstm.setInt(1, cartItemId);
+			status = pstm.executeUpdate();
+			if(status == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
 
 }
