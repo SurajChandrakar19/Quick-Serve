@@ -19,8 +19,16 @@ public class CartItem {
     private Timestamp orderDate;            // When the item was added to the cart
     private boolean isAvailable;            // Whether the item is still available for order
     private String status;                  // Status of the item ('in_cart', 'ordered', 'cancelled')
+    private String payMethod;
+    
 	public int getCartItemId() {
 		return cartItemId;
+	}
+	public String getPayMethod() {
+		return payMethod;
+	}
+	public void setPayMethod(String payMethod) {
+		this.payMethod = payMethod;
 	}
 	public void setCartItemId(int cartItemId) {
 		this.cartItemId = cartItemId;

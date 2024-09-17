@@ -54,12 +54,12 @@
 
                 <form action="updateCart" method="post" class="cart-item-form">
                     <label for="quantity">Qty:</label>
-                    <input type="number" id="quantity" name="quantity" value=<%=menu.getQuantity() %> min="1" class="quantity-input">
+                    <input type="number" id="quantity" name="quantity" value=<%=menu.getQuantity() %> min="0" class="quantity-input">
                     
                     <p class="cart-item-total-price">Total: <%= menu.getTotalPrice() %>₹</p>
                     <input type="hidden" name="cart_item_id" value=<%= menu.getCartItemId() %>>
-                    
-                    <button type="submit" class="btn-update-cart">Update</button>
+
+                	<button type="submit" class="btn-update-cart">Update</button>
                 </form>
             </div>
         </div>
@@ -70,7 +70,7 @@
     <h3>Cart Summary</h3>
     <p>Total Items: <span id="total-items"> <%= totalItem %></span></p>
     <p>Grand Total: ₹<span id="grand-total"> <%= total%></span></p>
-
+	<% session.setAttribute("cartItems", carts); %>
     <form action="placeOrder" method="post">
         <button type="submit" class="btn-place-order">Place Order</button>
     </form>

@@ -14,13 +14,13 @@
     </div>
     <div class="payment-container">
         <h1>Choose a Payment Option</h1>
-        <form action="confirmPayment.jsp" method="post">
+        <form action="paySuccess" method="post">
             <div class="payment-option">
-                <input type="radio" id="credit-card" name="payment" value="credit-card" checked>
+                <input type="radio" id="credit-card" name="payment" value="card" checked>
                 <label for="credit-card">Credit Card</label>
             </div>
             <div class="payment-option">
-                <input type="radio" id="paypal" name="payment" value="paypal">
+                <input type="radio" id="paypal" name="payment" value="upi">
                 <label for="paypal">PayPal</label>
             </div>
             <div class="payment-option">

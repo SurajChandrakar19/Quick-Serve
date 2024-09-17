@@ -18,9 +18,13 @@ public class UpdateCartServlet extends HttpServlet {
 			int quantity = Integer.parseInt(req.getParameter("quantity"));
 			int cartItemId = Integer.parseInt(req.getParameter("cart_item_id"));
 			CartDAOImpl cartDAOImpl = new CartDAOImpl();
-			if(cartItemId >= 1) {
+			if(quantity >= 1) {
 				cartDAOImpl.updateCart(quantity, cartItemId);
-			}				
+			}else if(quantity == 0) {
+				if(cartDAOImpl.removeFoddOnCart(cartItemId)) {
+					System.out.println("Remove successfully");
+				}
+			}
 			resp.sendRedirect("addToCart.jsp");
 	}
 }

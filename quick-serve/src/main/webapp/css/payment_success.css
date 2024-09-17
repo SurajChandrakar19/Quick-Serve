@@ -1,0 +1,104 @@
+@charset "ISO-8859-1";
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #fff;
+    --bg-color: #f4f4f9;
+    --accent-color: #388E3C;
+    --font-color: #fff;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--bg-color);
+    overflow: hidden;
+}
+
+.success-container {
+    text-align: center;
+    padding: 20px;
+    background: var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 2s ease-in;
+}
+
+.icon-container {
+    margin-bottom: 20px;
+}
+
+.checkmark-icon {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--accent-color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    animation: bounce 1s ease-in-out;
+}
+
+.checkmark-icon svg {
+    stroke-width: 3;
+}
+
+h1 {
+    color: var(--secondary-color);
+    margin: 10px 0;
+    font-size: 2.5em;
+    animation: fadeIn 2s ease-out;
+}
+
+p {
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+.btn-home {
+    text-decoration: none;
+    color: var(--secondary-color);
+    background-color: var(--accent-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+    display: inline-block;
+}
+
+.btn-home:hover {
+    background-color: #2C6B2F;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}

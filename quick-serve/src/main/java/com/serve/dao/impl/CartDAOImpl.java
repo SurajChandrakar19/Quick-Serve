@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class CartDAOImpl implements CartDAO {
 	private int status;
 	private ResultSet result;
 	private CartItem item;
+	private Statement statment;
 
 	public CartDAOImpl() {
 		con = MyConnection.getConnection();
@@ -65,15 +67,26 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	@Override
-	public boolean removeFoddOnCart(int menuId) {
-		// TODO Auto-generated method stub
+	public boolean removeFoddOnCart(int cartItemId) {
+		String query = String.format("DELETE FROM cart_item WHERE cart_item_id = %d",cartItemId);
+		try {
+			statment = con.createStatement();
+			status =statment.executeUpdate(query);
+			if(status == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
 
 	@Override
 	public List<CartItem> fetchMyCart(int userId) {
 		List<CartItem> itemsList = new ArrayList<>();
-		String query = "SELECT * FROM cart_item WHERE user_id = ?";
+		String query = "SELECT * FROM cart_item WHERE user_id = ? AND pay_method IS NULL;";
 		pstm = MyConnection.getPrepareStatement(query, con);
 		try {
 			pstm.setInt(1, userId);
@@ -166,6 +179,21 @@ public class CartDAOImpl implements CartDAO {
 			if(status == 1) {
 				return true;
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
+	@Override
+	public boolean updateCart(CartItem cartItem) {
+		System.out.println(cartItem.getPayMethod() + cartItem.getStatus() + cartItem.getCartItemId());
+		String query = String.format("UPDATE cart_item SET pay_method = \"%s\", status = \"%s\" WHERE cart_item_id = %d",cartItem.getPayMethod(),cartItem.getStatus(),cartItem.getCartItemId());
+		try {
+			statment = con.createStatement();
+			return statment.execute(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
