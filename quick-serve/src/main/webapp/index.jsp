@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="com.serve.models.UserModel" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +22,15 @@
         <a href="update-profile.jsp">Profile</a>
         <a href="pay.jsp">Payment</a>
         <a href="help.jsp">Help</a>
-        <a href="register.jsp">Logout</a>
-        <a href="login.jsp">Login</a>
+        <%
+        	UserModel user = (UserModel) session.getAttribute("loginUser");
+        	if(user == null){
+        %>
+        	<a href="login.jsp">Login</a>
+        		
+       <%}else{ %>
+       		<a href="logout">Logout</a>
+       	<%} %>
     </nav>
 
     <section class="hero">

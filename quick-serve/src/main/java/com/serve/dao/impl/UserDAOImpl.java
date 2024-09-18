@@ -4,21 +4,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+
 import com.serve.connection.MyConnection;
-import com.serve.dao.MainDAO;
-import com.serve.interfaces.Table;
+import com.serve.dao.LoginDAO;
 import com.serve.models.UserModel;
 
-public class UserDAOImpl implements MainDAO {
+public class UserDAOImpl implements LoginDAO {
 	private Connection con = null;
 	private PreparedStatement pstm = null;
 	private ResultSet result;
+	private Statement statement;
 
 	@Override
-	public boolean add(Table table) {
-		UserModel user = getUser(table);
+	public boolean add(UserModel users) {
+		UserModel user = getUser(users);
 		con = MyConnection.getConnection();
 		
 		if(con == null) {
@@ -56,20 +58,20 @@ public class UserDAOImpl implements MainDAO {
 	}
 
 	@Override
-	public boolean update(Table table) {
+	public boolean update(UserModel users) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(Table tbale) {
+	public boolean delete(UserModel tbale) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 	
 	@Override
-	public Table fetch(Table table) {
-		UserModel user = getUser(table);
+	public UserModel fetch(UserModel users) {
+		UserModel user = getUser(users);
 		String query = "SELECT * FROM user WHERE email = ?";
 		
 		con = MyConnection.getConnection();
@@ -81,7 +83,10 @@ public class UserDAOImpl implements MainDAO {
 			String password = result.getString("password");
 			
 			if(user.getPassword().equals(password)) {
+				
 				user.setfName(result.getString("full_name"));
+				user.setId(result.getInt("id"));
+				
 				updateLoginDate(user.getEmail());
 				return user;
 			}
@@ -111,9 +116,9 @@ public class UserDAOImpl implements MainDAO {
 		
 	}
 	
-	private UserModel getUser(Table table) {
+	private UserModel getUser(UserModel users) {
 		
-		return (UserModel) table;
+		return (UserModel) users;
 	}
 	
 }

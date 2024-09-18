@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="com.serve.models.UserModel" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,7 @@
     
 </head>
 <body>
+	<% if((UserModel)session.getAttribute("loginUser") == null){ %>
     <div class="login-container">
         <h1>Login</h1>
         <form action="cLogin" method="post">
@@ -25,5 +27,10 @@
             <a href="register.jsp">Register</a>
         </form>
     </div>
+    <%}else{
+    	response.sendRedirect("index.jsp");
+    	}	
+    %>
+  
 </body>
 </html>

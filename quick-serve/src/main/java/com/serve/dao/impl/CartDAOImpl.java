@@ -84,9 +84,15 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	@Override
-	public List<CartItem> fetchMyCart(int userId) {
+	public List<CartItem> fetchMyCart(int userId, String witchHistory) {
 		List<CartItem> itemsList = new ArrayList<>();
-		String query = "SELECT * FROM cart_item WHERE user_id = ? AND pay_method IS NULL;";
+		String query;
+		if(witchHistory == null) {
+			query = "SELECT * FROM cart_item WHERE user_id = ? AND pay_method IS NULL;";
+		}else {
+			query = "SELECT * FROM cart_item WHERE user_id = ? AND pay_method IS NOT NULL;";
+		}
+		
 		pstm = MyConnection.getPrepareStatement(query, con);
 		try {
 			pstm.setInt(1, userId);
@@ -167,6 +173,7 @@ public class CartDAOImpl implements CartDAO {
 		items.setOrderDate(result.getTimestamp("order_date"));
 		items.setAvailable(result.getBoolean("is_available"));
 		items.setStatus(result.getString("status"));
+		items.setPayMethod(result.getString("pay_method"));
 		return items;
 	}
 
@@ -200,6 +207,26 @@ public class CartDAOImpl implements CartDAO {
 		}
 		
 		return false;
+	}
+
+	@Override
+	
+public CartItem fetchCartItemById(int cartItemId) {
+		String query = "SELECT * FROM cart_item WHERE cart_item_id = ?;";
+		pstm = MyConnection.getPrepareStatement(query, con);
+		try {
+			pstm.setInt(1, cartItemId);
+			result = pstm.executeQuery();
+			if(result.next()) {
+				item = getCartItems();
+				return item;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

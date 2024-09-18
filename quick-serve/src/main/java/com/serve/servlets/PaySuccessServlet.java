@@ -19,15 +19,24 @@ public class PaySuccessServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
+		
 		List<CartItem> carts = (List<CartItem>) session.getAttribute("cartItems");
-		String payMethod = req.getParameter("payment");
-		CartDAOImpl cartDAOImpl = new CartDAOImpl();
-		for(CartItem menu : carts ){
-			menu.setStatus("ordered");
-			menu.setPayMethod(payMethod);
-			cartDAOImpl.updateCart(menu);
+		if(carts == null) {
+			resp.sendRedirect("restaurants");
+		}else {
+			String payMethod = req.getParameter("payment");
+			
+			CartDAOImpl cartDAOImpl = new CartDAOImpl();
+			
+			for(CartItem menu : carts ){
+				menu.setStatus("ordered");
+				menu.setPayMethod(payMethod);
+				cartDAOImpl.updateCart(menu);
+			}
+			
+			session.removeAttribute("cartItems");
+	
+			resp.sendRedirect("payment_success.jsp");
 		}
-		session.removeAttribute("cartItems");
-		resp.sendRedirect("payment_success.jsp");
 	}
 }

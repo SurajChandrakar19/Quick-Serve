@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="com.serve.dao.impl.CartDAOImpl"%>
+<%@page import="com.serve.models.CartItem" %>
+<%@page import = "java.util.List"%>
+<%@page import="java.util.Iterator" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,18 +18,22 @@
     </div>
     <div class="order-history-container">
         <h1>Your Past Orders</h1>
+        <% 
+	        CartDAOImpl cart = new CartDAOImpl();
+	    	List<CartItem> carts = cart.fetchMyCart(1,"HISTORY");
+	    	int totalItem = 0;
+	    	for(CartItem menu : carts ){
+		%>
         <div class="order-item">
-            <p><strong>Order ID:</strong> #12345</p>
-            <p><strong>Date:</strong> Aug 15, 2023</p>
-            <p><strong>Total:</strong> $50.99</p>
-            <a href="orderDetails.jsp" class="btn">View Details</a>
+        	 <form action="orderDetails.jsp" method="get">
+                <input type="hidden" name="cartItemId" value="<%= menu.getCartItemId() %>">
+                <p><strong>Order ID:</strong> <%= menu.getCartItemId() %></p>
+                <p><strong>Date:</strong> <%= menu.getOrderDate() %></p>
+                <p><strong>Total:</strong> <%= menu.getTotalPrice() %></p>
+                <input type="submit" value="View Details" class="btn">
+            </form>
         </div>
-        <div class="order-item">
-            <p><strong>Order ID:</strong> #12346</p>
-            <p><strong>Date:</strong> Aug 20, 2023</p>
-            <p><strong>Total:</strong> $32.99</p>
-            <a href="orderDetails.jsp" class="btn">View Details</a>
-        </div>
+        <%} %>
     </div>
 </body>
 </html>

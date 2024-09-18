@@ -16,13 +16,20 @@ import jakarta.servlet.http.HttpSession;
 public class CheckLoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String email = req.getParameter("email");
-		String password = req.getParameter("password");
+		HttpSession session = req.getSession();
 		
-		if(email != null && password != null) {
-			HttpSession session = req.getSession();
-			session.setAttribute("loginUser", (new UserModel(email, password)));
-			req.getRequestDispatcher("login").forward(req, resp);
+		if((UserModel)session.getAttribute("loginUser") != null) {
+			resp.sendRedirect("index.jsp");
+		}else {
+		
+			String email = req.getParameter("email");
+			String password = req.getParameter("password");
+			
+			if(email != null && password != null) {
+				
+				session.setAttribute("user", (new UserModel(email, password)));
+				req.getRequestDispatcher("login").forward(req, resp);
+			}
 		}
 	}
 }

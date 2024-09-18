@@ -1,0 +1,28 @@
+@charset "ISO-8859-1";
+.order-details-container {
+    padding: 20px;
+    background-color: var(--bg-color);
+}
+
+.order-item-detail {
+    background-color: var(--secondary-color);
+    color: var(--font-color);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-item-detail p {
+    margin: 0;
+    font-size: 1em;
+}
+
+.order-item-detail ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-item-detail ul li {
+    margin-bottom: 5px;
+}

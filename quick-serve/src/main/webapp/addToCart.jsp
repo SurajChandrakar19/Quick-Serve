@@ -35,7 +35,7 @@
     <h2>Your Cart</h2>
 	<% 
 	CartDAOImpl cart = new CartDAOImpl();
-	List<CartItem> carts = cart.fetchMyCart(1);
+	List<CartItem> carts = cart.fetchMyCart(1,null);
 	BigDecimal total = BigDecimal.ZERO;
 	int totalItem = 0;
 	for(CartItem menu : carts ){

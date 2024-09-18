@@ -3,7 +3,6 @@ package com.serve.servlets;
 import java.io.IOException;
 
 import com.serve.dao.impl.UserDAOImpl;
-import com.serve.interfaces.Table;
 import com.serve.models.UserModel;
 
 import jakarta.servlet.ServletException;
@@ -19,11 +18,11 @@ public class LoginServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		Table table = (Table) session.getAttribute("loginUser");
+		UserModel user = (UserModel)session.getAttribute("user");
 		
 		UserDAOImpl userDAOImpl = new UserDAOImpl();
-		UserModel user = (UserModel) userDAOImpl.fetch(table);
-		if(user != null) {
+		UserModel userLogin = (UserModel) userDAOImpl.fetch(user);
+		if(userLogin != null) {
 			resp.sendRedirect("index.jsp");
 			session.setAttribute("loginUser", user);
 			System.out.println("login user succesfully");

@@ -1,8 +1,7 @@
 package com.serve.models;
 
-import com.serve.interfaces.Table;
 
-public class UserModel implements Table{
+public class UserModel{
 	private int id;
 	private String fName;
 	private String email;
