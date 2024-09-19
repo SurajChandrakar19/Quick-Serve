@@ -8,6 +8,17 @@
     <title>Restaurant List</title>
     <link rel="stylesheet" href="./css/common-style.css">
     <link rel="stylesheet" href="./css/restaurants.css">
+    <style type="text/css">
+    	.restaurant-card{
+    		width: 300px; /* Fixed width */
+    		height: 400px; /* Fixed height */
+    	}
+    	.restaurant-logo {
+		    width: 80px; /* Fixed logo size */
+		    height: 80px; /* Fixed logo size */
+		    border-radius: 50%;
+		}
+    </style>
 </head>
 <body>
     <div class="header"> 
@@ -20,23 +31,24 @@
                 for (RestaurantModel restaurant : restaurants) {
         %>
         <a href="menus?id=<%=restaurant.getId()%>" style="text-decoration:none;">
-	        <div class="restaurant-card">
-	            <div class="restaurant-header">
-	                <img src="<%= restaurant.getLogoUrl() %>" alt="<%= restaurant.getName() %> logo" class="restaurant-logo">
-	                <h2><%= restaurant.getName() %></h2>
-	            </div>
-	            <div class="restaurant-details">
-	                <p><strong>Cuisine:</strong> <%= restaurant.getCuisineType() %></p>
-	                <p><strong>Address:</strong> <%= restaurant.getAddress() %></p>
-	                <p><strong>Opening Hours:</strong> <%= restaurant.getOpeningHours() %></p>
-	                <p><strong>Delivery Time:</strong> <%= restaurant.getDeliveryTime() %></p>
-	                <p><strong>Delivery Areas:</strong> <%= restaurant.getDeliveryAreas() %></p>
-	                <p><strong>Review Count:</strong> <%= restaurant.getReviewCount() %></p>
-	            </div>
-	            <div class="restaurant-images">
-	                <img src="<%= restaurant.getRestaurantPhotoUrl() %>" alt="<%= restaurant.getName() %> photo" class="restaurant-photo">
-	            </div>
-	        </div>
+            <div class="restaurant-card">
+                <div class="restaurant-header">
+                    <img src="<%= restaurant.getLogoUrl() %>" alt="<%= restaurant.getName() %> logo" class="restaurant-logo">
+                    <h2><%= restaurant.getName() %></h2>
+                </div>
+                <div class="restaurant-details">
+                    <p><strong>Cuisine:</strong> <%= restaurant.getCuisineType() %></p>
+                    <p><strong>Address:</strong> <%= restaurant.getAddress() %></p>
+                    <p><strong>Opening Hours:</strong> <%= restaurant.getOpeningHours() %></p>
+                    <p><strong>Delivery Time:</strong> <%= restaurant.getDeliveryTime() %></p>
+                    <p><strong>Delivery Areas:</strong> <%= restaurant.getDeliveryAreas() %></p>
+                    <p><strong>Review Count:</strong> <%= restaurant.getReviewCount() %></p>
+                </div>
+                <!-- 
+                <div class="restaurant-images">
+                    <img src="<%= restaurant.getRestaurantPhotoUrl() %>" alt="<%= restaurant.getName() %> photo" class="restaurant-photo">
+                </div> -->
+            </div>
         </a>
         <% 
                 }

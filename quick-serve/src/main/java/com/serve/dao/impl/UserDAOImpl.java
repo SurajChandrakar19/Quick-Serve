@@ -4,9 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 import com.serve.connection.MyConnection;
 import com.serve.dao.LoginDAO;
@@ -16,7 +13,6 @@ public class UserDAOImpl implements LoginDAO {
 	private Connection con = null;
 	private PreparedStatement pstm = null;
 	private ResultSet result;
-	private Statement statement;
 
 	@Override
 	public boolean add(UserModel users) {
@@ -27,7 +23,7 @@ public class UserDAOImpl implements LoginDAO {
 			return false;
 		}
 		
-		String query = "INSERT INTO user(full_name,email,password,phonenumber,las_log_date,reg_date) VALUES(?,?,?,?,?,NOW())";
+		String query = "INSERT INTO user(full_name,email,password,phonenumber,las_log_date,reg_date) VALUES(?,?,?,?,NOW(),NOW())";
 		
 			pstm = MyConnection.getPrepareStatement(query, con);
 			try {
@@ -36,7 +32,7 @@ public class UserDAOImpl implements LoginDAO {
 				pstm.setString(2, user.getEmail());
 				pstm.setString(3, user.getPassword());
 				pstm.setString(4, user.getPhonenumber());
-				pstm.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
+//				pstm.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
 				
 				//get how many row affected 
 				int re = pstm.executeUpdate();
@@ -59,7 +55,8 @@ public class UserDAOImpl implements LoginDAO {
 
 	@Override
 	public boolean update(UserModel users) {
-		// TODO Auto-generated method stub
+		String query = "UPDATE user SET full_name = ?, email = ?, password = ? phonenumber = ?";
+		
 		return false;
 	}
 
@@ -86,8 +83,10 @@ public class UserDAOImpl implements LoginDAO {
 				
 				user.setfName(result.getString("full_name"));
 				user.setId(result.getInt("id"));
+				user.setPhonenumber(result.getString("phonenumber"));
 				
 				updateLoginDate(user.getEmail());
+				
 				return user;
 			}
 		} catch (SQLException e) {

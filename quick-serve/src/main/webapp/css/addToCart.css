@@ -69,7 +69,9 @@ header {
     border-radius: 8px;
     margin-bottom: 15px;
     height: auto;  /* Reduced height */
+    width: 70vw;   /* Set width to 70vw */
 }
+
 
 .cart-item-image {
     width: 100px;   /* Reduced width */

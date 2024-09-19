@@ -27,10 +27,11 @@ public class MenuDAOImpl implements MenuDAO {
 		String query = "SELECT * FROM menu_item WHERE restaurant_id = ?";
 		pstm = MyConnection.getPrepareStatement(query, con);
 		try {
-			MenuModel menu = new MenuModel();
+			MenuModel menu = null;
 			pstm.setInt(1, restaurantId);
 			result = pstm.executeQuery();
 			while(result.next()) {
+				menu = new MenuModel();
 				menu.setItemId(result.getInt("item_id"));
 				menu.setRestaurantId(result.getInt("restaurant_id"));
 				menu.setItemName(result.getString("item_name"));

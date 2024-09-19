@@ -23,7 +23,7 @@ public class RegisterCheckingServlet extends HttpServlet{
 		if(name != null && email != null && password != null && number.length() == 10) {
 			
 			HttpSession session = req.getSession();
-			session.setAttribute("user", new UserModel(name,email, password, number));
+			session.setAttribute("registerUser", new UserModel(name,email, password, number));
 			System.out.println("user register checking confirmd");
 			req.getRequestDispatcher("/register").forward(req, resp);
 			

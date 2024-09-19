@@ -20,7 +20,14 @@ public class CartItem {
     private boolean isAvailable;            // Whether the item is still available for order
     private String status;                  // Status of the item ('in_cart', 'ordered', 'cancelled')
     private String payMethod;
+    private String menuImageUrl;
     
+	public String getMenuImageUrl() {
+		return menuImageUrl;
+	}
+	public void setMenuImageUrl(String menuImageUrl) {
+		this.menuImageUrl = menuImageUrl;
+	}
 	public int getCartItemId() {
 		return cartItemId;
 	}

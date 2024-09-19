@@ -1,18 +1,12 @@
 package com.serve.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.serve.dao.impl.MenuDAOImpl;
-import com.serve.models.MenuModel;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/menus")
 @SuppressWarnings("serial")

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +15,8 @@ public class OrderHistoryDAOImpl implements OrderHistoryDAO {
 
 	private Connection con;
 	private PreparedStatement pstm;
-	private int status;
 	private ResultSet result;
 	private CartItem item;
-	private Statement statment;
 	
 	public OrderHistoryDAOImpl() {
 		con = MyConnection.getConnection();

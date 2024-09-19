@@ -1,6 +1,5 @@
 package com.serve.dao.impl;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +28,9 @@ public class CartDAOImpl implements CartDAO {
 
 	@Override
 	public boolean addFoodOnCart(int userId, int restaurantId, MenuModel menu, int quantity, boolean isCustomized, String customizationDetails, boolean isSpicy) {
+
 //		MenuModel menu = null;
+		System.out.println();
 		String query = "INSERT INTO cart_item (user_id, restaurant_id, menu_item_id, item_name, price, quantity, total_price, is_customized, customization_details, is_spicy, is_veg, order_date, is_available, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, ?);";
 		try {
 			item = fetchMyCart(userId, restaurantId, menu.getItemId());
@@ -88,9 +89,9 @@ public class CartDAOImpl implements CartDAO {
 		List<CartItem> itemsList = new ArrayList<>();
 		String query;
 		if(witchHistory == null) {
-			query = "SELECT * FROM cart_item WHERE user_id = ? AND pay_method IS NULL;";
+			query = "SELECT ci.*, u.menu_image_url FROM cart_item ci JOIN menu_item u ON menu_item_id = u.item_id WHERE ci.user_id = ? AND ci.pay_method IS NULL;";
 		}else {
-			query = "SELECT * FROM cart_item WHERE user_id = ? AND pay_method IS NOT NULL;";
+			query = "SELECT ci.*, u.menu_image_url FROM cart_item ci JOIN menu_item u ON menu_item_id = u.item_id WHERE ci.user_id = ? AND ci.pay_method IS NOT NULL;";
 		}
 		
 		pstm = MyConnection.getPrepareStatement(query, con);
@@ -114,7 +115,7 @@ public class CartDAOImpl implements CartDAO {
 
 	@Override
 	public CartItem fetchMyCart(int userId, int restaurantId, int menuId) {
-		String query = "SELECT * FROM cart_item WHERE user_id = ? AND restaurant_id = ? AND menu_item_id = ?";
+		String query = "SELECT ci.*, u.menu_image_url FROM cart_item ci JOIN menu_item u ON menu_item_id = u.item_id WHERE ci.user_id = ? AND ci.restaurant_id = ? AND ci.menu_item_id = ?";
 		pstm = MyConnection.getPrepareStatement(query, con);
 		try {
 			pstm.setInt(1, userId);
@@ -174,6 +175,7 @@ public class CartDAOImpl implements CartDAO {
 		items.setAvailable(result.getBoolean("is_available"));
 		items.setStatus(result.getString("status"));
 		items.setPayMethod(result.getString("pay_method"));
+		items.setMenuImageUrl(result.getString("menu_image_url"));
 		return items;
 	}
 
@@ -212,7 +214,7 @@ public class CartDAOImpl implements CartDAO {
 	@Override
 	
 public CartItem fetchCartItemById(int cartItemId) {
-		String query = "SELECT * FROM cart_item WHERE cart_item_id = ?;";
+		String query = "SELECT ci.*, u.menu_image_url FROM cart_item ci JOIN menu_item u ON menu_item_id = u.item_id WHERE ci.cart_item_id = ?;";
 		pstm = MyConnection.getPrepareStatement(query, con);
 		try {
 			pstm.setInt(1, cartItemId);
@@ -221,7 +223,6 @@ public CartItem fetchCartItemById(int cartItemId) {
 				item = getCartItems();
 				return item;
 			}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

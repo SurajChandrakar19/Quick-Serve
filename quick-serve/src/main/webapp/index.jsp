@@ -11,7 +11,14 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to TastyTrax Food Delivery</h1>
+    	<%
+    	UserModel user = (UserModel) session.getAttribute("loginUser");
+    	if(user == null){
+    	%>
+        <h1>Welcome to QuickServe Food Delivery</h1>
+        <%}else{ %>
+        	<h1><%= user.getfName() %> Welcome to QuickServe Food Delivery</h1>
+        <%} %>
     </header>
     
     <nav>
@@ -23,7 +30,7 @@
         <a href="pay.jsp">Payment</a>
         <a href="help.jsp">Help</a>
         <%
-        	UserModel user = (UserModel) session.getAttribute("loginUser");
+        	
         	if(user == null){
         %>
         	<a href="login.jsp">Login</a>

@@ -1,10 +1,6 @@
 package com.serve.servlets;
 
 import java.io.IOException;
-import java.util.List;
-
-import com.serve.dao.impl.CartDAOImpl;
-import com.serve.models.CartItem;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

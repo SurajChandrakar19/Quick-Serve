@@ -1,4 +1,5 @@
 @charset "ISO-8859-1";
+
  body {
      font-family: 'Arial', sans-serif;
      background-color: var(--bg-color);
@@ -58,3 +59,13 @@
          width: 100%;
      }
  }
+ 
+.menu-item img.menu-image {
+    width: 200px; /* Set a fixed width */
+    height: 150px; /* Set a fixed height */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    border-radius: 10px; /* Rounds the corners of the image */
+    margin-bottom: 10px; /* Space between the image and the text */
+    overflow: hidden; /* Hides overflow if the image is larger */
+}
+ 

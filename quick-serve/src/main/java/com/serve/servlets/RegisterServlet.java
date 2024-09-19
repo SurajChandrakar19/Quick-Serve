@@ -18,10 +18,12 @@ public class RegisterServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		UserDAOImpl userDAOImpl = new UserDAOImpl();
-		if(userDAOImpl.add((UserModel)req.getSession().getAttribute("user"))) {
+		
+		if(userDAOImpl.add((UserModel)req.getSession().getAttribute("registerUser"))) {
 			System.out.println("successfully register");
 			resp.sendRedirect("login.jsp");
 			userDAOImpl = null;
+			req.getSession().removeAttribute("registerUser");
 		}else {
 			System.out.println("not register");
 		}
