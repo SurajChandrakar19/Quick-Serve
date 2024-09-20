@@ -18,7 +18,7 @@ public class PayMethodServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		List<CartItem> carts = (List<CartItem>) session.getAttribute("cartItems");
+		List<CartItem> carts = (List<CartItem>)session.getAttribute("cartItems");
 		if(carts == null) {
 			resp.sendRedirect("restaurants");
 		}else {

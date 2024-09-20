@@ -38,6 +38,7 @@ public class CartDAOImpl implements CartDAO {
 				inItemQ(1,item.getCartItemId());
 				return true;
 			}
+			con = MyConnection.getConnection();
 			pstm = MyConnection.getPrepareStatement(query, con);
 			pstm.setInt(1, userId);                           // Set user_id
 	        pstm.setInt(2, restaurantId);                     // Set restaurant_id
@@ -63,6 +64,8 @@ public class CartDAOImpl implements CartDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			MyConnection.closeConnection(con, pstm);
 		}
 		return false;
 	}
@@ -79,8 +82,9 @@ public class CartDAOImpl implements CartDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		} finally {
+			MyConnection.closeConnection(con, pstm);
+		}		
 		return false;
 	}
 
@@ -108,6 +112,8 @@ public class CartDAOImpl implements CartDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			MyConnection.closeConnection(con, pstm);
 		}
 		
 		return null;
@@ -130,6 +136,8 @@ public class CartDAOImpl implements CartDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			MyConnection.closeConnection(con, pstm);
 		}
 		
 		
@@ -152,11 +160,48 @@ public class CartDAOImpl implements CartDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		} finally {
+			MyConnection.closeConnection(con, pstm);
+		}		
 		return false;
 	}
-	
+
+	@Override
+	public boolean updateCart(CartItem cartItem) {
+		System.out.println(cartItem.getPayMethod() + cartItem.getStatus() + cartItem.getCartItemId());
+		String query = String.format("UPDATE cart_item SET pay_method = \"%s\", status = \"%s\" WHERE cart_item_id = %d",cartItem.getPayMethod(),cartItem.getStatus(),cartItem.getCartItemId());
+		try {
+			statment = con.createStatement();
+			return statment.execute(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			MyConnection.closeConnection(con, pstm);
+		}
+		return false;
+	}
+
+	@Override
+	public CartItem fetchCartItemById(int cartItemId) {
+		String query = "SELECT ci.*, u.menu_image_url FROM cart_item ci JOIN menu_item u ON menu_item_id = u.item_id WHERE ci.cart_item_id = ?;";
+		pstm = MyConnection.getPrepareStatement(query, con);
+		try {
+			pstm.setInt(1, cartItemId);
+			result = pstm.executeQuery();
+			if(result.next()) {
+				item = getCartItems();
+				return item;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			MyConnection.closeConnection(con, pstm);
+		}	
+		return null;
+	}
+
 	private CartItem getCartItems() throws SQLException {
 		CartItem items = new CartItem();
 		items.setCartItemId(result.getInt("cart_item_id"));
@@ -181,6 +226,7 @@ public class CartDAOImpl implements CartDAO {
 
 	private boolean inItemQ(int quantity, int cartItemId) {
 		String query = "UPDATE cart_item SET quantity = quantity+1, price = price * quantity+1 WHERE cart_item_id = ?;";
+		con = MyConnection.getConnection();
 		pstm = MyConnection.getPrepareStatement(query, con);
 		try {
 			pstm.setInt(1, cartItemId);
@@ -195,39 +241,4 @@ public class CartDAOImpl implements CartDAO {
 		
 		return false;
 	}
-
-	@Override
-	public boolean updateCart(CartItem cartItem) {
-		System.out.println(cartItem.getPayMethod() + cartItem.getStatus() + cartItem.getCartItemId());
-		String query = String.format("UPDATE cart_item SET pay_method = \"%s\", status = \"%s\" WHERE cart_item_id = %d",cartItem.getPayMethod(),cartItem.getStatus(),cartItem.getCartItemId());
-		try {
-			statment = con.createStatement();
-			return statment.execute(query);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return false;
-	}
-
-	@Override
-	
-public CartItem fetchCartItemById(int cartItemId) {
-		String query = "SELECT ci.*, u.menu_image_url FROM cart_item ci JOIN menu_item u ON menu_item_id = u.item_id WHERE ci.cart_item_id = ?;";
-		pstm = MyConnection.getPrepareStatement(query, con);
-		try {
-			pstm.setInt(1, cartItemId);
-			result = pstm.executeQuery();
-			if(result.next()) {
-				item = getCartItems();
-				return item;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 }

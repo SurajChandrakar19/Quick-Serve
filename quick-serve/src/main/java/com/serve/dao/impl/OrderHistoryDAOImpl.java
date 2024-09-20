@@ -40,6 +40,8 @@ public class OrderHistoryDAOImpl implements OrderHistoryDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			MyConnection.closeConnection(con, pstm);
 		}
 		
 		return null;

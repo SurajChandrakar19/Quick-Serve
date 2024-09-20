@@ -45,17 +45,32 @@ public class UserDAOImpl implements LoginDAO {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
-					//closing connection and prepared statement
-						MyConnection.closeConnection(con, pstm);
+				//closing connection and prepared statement
+				MyConnection.closeConnection(con, pstm);
 			}
 			
-				
 		return false;
 	}
 
 	@Override
-	public boolean update(UserModel users) {
-		String query = "UPDATE user SET full_name = ?, email = ?, password = ? phonenumber = ?";
+	public boolean update(UserModel user) {
+		String query = "UPDATE user SET full_name = ?, email = ?, phonenumber = ? WHERE id = ? AND password = ?;";
+		con = MyConnection.getConnection();
+		pstm = MyConnection.getPrepareStatement(query, con);
+		try {
+			pstm.setString(1, user.getfName());
+			pstm.setString(2, user.getEmail());
+			pstm.setString(3, user.getPhonenumber());
+			pstm.setInt(4, user.getId());
+			pstm.setString(5, user.getPassword());
+			int status = pstm.executeUpdate();
+			if(status == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return false;
 	}
@@ -76,18 +91,19 @@ public class UserDAOImpl implements LoginDAO {
 		try {
 			pstm.setString(1, user.getEmail());
 			result = pstm.executeQuery();
-			result.next();
-			String password = result.getString("password");
 			
-			if(user.getPassword().equals(password)) {
-				
-				user.setfName(result.getString("full_name"));
-				user.setId(result.getInt("id"));
-				user.setPhonenumber(result.getString("phonenumber"));
-				
-				updateLoginDate(user.getEmail());
-				
-				return user;
+			if(result.next()) {
+				String password = result.getString("password");
+				if(user.getPassword().equals(password)) {
+					
+					user.setfName(result.getString("full_name"));
+					user.setId(result.getInt("id"));
+					user.setPhonenumber(result.getString("phonenumber"));
+					
+					updateLoginDate(user.getEmail());
+					
+					return user;
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

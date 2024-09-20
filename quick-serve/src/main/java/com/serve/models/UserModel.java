@@ -13,13 +13,22 @@ public class UserModel{
 	
 	
 	public UserModel() {
-		super();
 	}
+
+
+	public UserModel(int id, String fName, String email, String password, String phonenumber) {
+		this.id = id;
+		this.fName = fName;
+		this.email = email;
+		this.password = password;
+		this.phonenumber = phonenumber;
+	}
+
+
 
 
 	public UserModel(int id, String fName, String email, String password, String phonenumber, String profilePic,
 			String regDate, String laaLogDate) {
-		super();
 		this.id = id;
 		this.fName = fName;
 		this.email = email;
